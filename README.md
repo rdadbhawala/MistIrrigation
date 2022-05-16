@@ -11,6 +11,7 @@ https://www.youtube.com/watch?v=wVKZpOUuCzw
 
 ### File
 https://create.arduino.cc/projecthub/MisterBotBreak/how-to-use-a-datalogger-ffd5f4
+https://www.instructables.com/Arduino-Data-Logger-Shield-How-to-Control-Sample-R/
 
 ## Misc Info
 
