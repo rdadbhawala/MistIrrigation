@@ -21,6 +21,10 @@ void setup() {
 
   digitalWrite(p1, HIGH);
   digitalWrite(p2, HIGH);
+
+  delay(3000);
+  waterThePlants(p1, 5000);
+  waterThePlants(p2, 5000);
 }
 
 void loop() {
@@ -30,8 +34,8 @@ void loop() {
   // endif
 
   if (isItTimeToWaterThePlants() == 1) {
-    waterThePlants(p1);
-    waterThePlants(p2);
+    waterThePlants(p1, 60000);
+    waterThePlants(p2, 60000);
   }
   delay(30000);
 }
@@ -92,8 +96,8 @@ void print2digits(int number) {
   Serial.print(number);
 }
 
-void waterThePlants(int pumpPin) {
+void waterThePlants(int pumpPin, int timeInMillis) {
   digitalWrite(pumpPin, LOW);
-  delay(60000);
+  delay(timeInMillis);
   digitalWrite(pumpPin, HIGH);
 }
