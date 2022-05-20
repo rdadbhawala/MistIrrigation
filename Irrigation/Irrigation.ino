@@ -16,8 +16,8 @@ void setup() {
   while (!Serial) ; // wait for serial
   delay(200);
 
-  pinMode(p2, OUTPUT);
   pinMode(p1, OUTPUT);
+  pinMode(p2, OUTPUT);
 
   digitalWrite(p1, HIGH);
   digitalWrite(p2, HIGH);
@@ -34,10 +34,16 @@ void loop() {
   // endif
 
   if (isItTimeToWaterThePlants() == 1) {
-    waterThePlants(p1, 60000);
-    waterThePlants(p2, 60000);
+    long p1Millis = 60000;
+    long p2Millis = 60000;
+
+    waterThePlants(p1, p1Millis);
+    waterThePlants(p2, p2Millis);
+  } else {
+    digitalWrite(p1, HIGH);
+    digitalWrite(p2, HIGH);
   }
-  delay(30000);
+  delay(5000);
 }
 
 int isItTimeToWaterThePlants() {
@@ -45,22 +51,11 @@ int isItTimeToWaterThePlants() {
 
   if (RTC.read(tm)) {
     printTime(tm);
+    // if (tm.Minute % 2 == 0) {
     if (tm.Hour == 7 && tm.Minute == 30) {
       return 1;
     }
-
-    // if ((tm.Second / 10) % 2 == 0) {
-    //   digitalWrite(p1, LOW);
-    //   delay(10000);
-    //   digitalWrite(p1, HIGH);
-    // } else {
-    //   digitalWrite(p2, LOW);
-    //   delay(10000);
-    //   digitalWrite(p2, HIGH);
-    // }
-
   } else {
-    // beep 3 times for rtc error
 
     if (RTC.chipPresent()) {
       Serial.println("The DS1307 is stopped.  Please run the SetTime");
@@ -68,7 +63,6 @@ int isItTimeToWaterThePlants() {
       Serial.println("DS1307 read error!  Please check the circuitry.");
     }
     Serial.println();
-    delay(9000);
   }
 
   return 0;
@@ -96,8 +90,19 @@ void print2digits(int number) {
   Serial.print(number);
 }
 
-void waterThePlants(int pumpPin, int timeInMillis) {
+void waterThePlants(int pumpPin, long timeInMillis) {
+  Serial.print(pumpPin);
+  Serial.print(" ");
+  Serial.print(timeInMillis);
+  Serial.print(" ON ");
   digitalWrite(pumpPin, LOW);
-  delay(timeInMillis);
+  while (timeInMillis > 0) {
+    int sleepTime = min(timeInMillis, 10000);
+    Serial.print(sleepTime);
+    Serial.print(" ");
+    delay(sleepTime);
+    timeInMillis -= sleepTime;
+  }
   digitalWrite(pumpPin, HIGH);
+  Serial.println("OFF");
 }
