@@ -34,8 +34,8 @@ void loop() {
   // endif
 
   if (isItTimeToWaterThePlants() == 1) {
-    long p1Millis = 60000;
-    long p2Millis = 60000;
+    long p1Millis = 45000;
+    long p2Millis = 45000;
 
     waterThePlants(p1, p1Millis);
     waterThePlants(p2, p2Millis);
@@ -52,7 +52,7 @@ int isItTimeToWaterThePlants() {
   if (RTC.read(tm)) {
     printTime(tm);
     // if (tm.Minute % 2 == 0) {
-    if (tm.Hour == 7 && tm.Minute == 30) {
+    if (tm.Hour == 8 && tm.Minute == 30) {
       return 1;
     }
   } else {
