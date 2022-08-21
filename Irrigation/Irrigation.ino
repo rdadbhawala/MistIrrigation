@@ -2,8 +2,7 @@
 #include <TimeLib.h>
 #include <DS1307RTC.h>
 
-int p1 = 13;
-int p2 = 12;
+int p1 = 4;
 
 void setup() {
   // put your setup code here, to run once:
@@ -17,14 +16,9 @@ void setup() {
   delay(200);
 
   pinMode(p1, OUTPUT);
-  pinMode(p2, OUTPUT);
-
-  digitalWrite(p1, HIGH);
-  digitalWrite(p2, HIGH);
 
   delay(3000);
   waterThePlants(p1, 5000);
-  waterThePlants(p2, 5000);
 }
 
 void loop() {
@@ -35,13 +29,8 @@ void loop() {
 
   if (isItTimeToWaterThePlants() == 1) {
     long p1Millis = 60000;
-    long p2Millis = 60000;
 
     waterThePlants(p1, p1Millis);
-    waterThePlants(p2, p2Millis);
-  } else {
-    digitalWrite(p1, HIGH);
-    digitalWrite(p2, HIGH);
   }
   delay(5000);
 }
@@ -52,7 +41,7 @@ int isItTimeToWaterThePlants() {
   if (RTC.read(tm)) {
     printTime(tm);
     // if (tm.Minute % 2 == 0) {
-    if (tm.Hour == 8 && tm.Minute == 30) {
+    if (tm.Hour == 8 && tm.Minute == 0) {
       return 1;
     }
   } else {
@@ -95,7 +84,7 @@ void waterThePlants(int pumpPin, long timeInMillis) {
   Serial.print(" ");
   Serial.print(timeInMillis);
   Serial.print(" ON ");
-  digitalWrite(pumpPin, LOW);
+  digitalWrite(pumpPin, HIGH);
   while (timeInMillis > 0) {
     int sleepTime = min(timeInMillis, 10000);
     Serial.print(sleepTime);
@@ -103,6 +92,6 @@ void waterThePlants(int pumpPin, long timeInMillis) {
     delay(sleepTime);
     timeInMillis -= sleepTime;
   }
-  digitalWrite(pumpPin, HIGH);
+  digitalWrite(pumpPin, LOW);
   Serial.println("OFF");
 }
