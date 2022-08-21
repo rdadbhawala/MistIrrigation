@@ -34,8 +34,8 @@ void loop() {
   // endif
 
   if (isItTimeToWaterThePlants() == 1) {
-    long p1Millis = 45000;
-    long p2Millis = 45000;
+    long p1Millis = 60000;
+    long p2Millis = 60000;
 
     waterThePlants(p1, p1Millis);
     waterThePlants(p2, p2Millis);
