@@ -29,10 +29,11 @@ Pumps:
 * https://www.amazon.in/gp/product/B07BW882S2/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
 * https://www.amazon.in/gp/product/B07P81K5XD/ref=ppx_od_dt_b_asin_title_s01?ie=UTF8&psc=1
 
-Pipe: 6MM inner diameter transparent pipe purchased from local hardware store.
-
 Nozzle: https://www.amazon.in/gp/product/B07SRMBMDJ/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
 
+Pipe: 6MM inner diameter transparent pipe purchased from local hardware store.
+
+SwitchBox: Made using materials sourced from local hardware store.
 ## Misc Info
 
 ### RTC Battery Type
