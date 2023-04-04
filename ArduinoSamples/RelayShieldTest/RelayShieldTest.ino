@@ -28,11 +28,15 @@ void setup() {
 }
 
 void setPin(int pinNo) {
-  Serial.println("Setting Pin # ");
-  Serial.println(pinNo);
+  Serial.print("Setting Pin # ");
+  Serial.print(pinNo);
+  Serial.print(" high ");
   digitalWrite(pinNo, HIGH);
+  Serial.print(" delay ");
   delay(3000);
+  Serial.print(" low ");
   digitalWrite(pinNo, LOW);
+  Serial.println(" done");
 }
 
 void loop() {

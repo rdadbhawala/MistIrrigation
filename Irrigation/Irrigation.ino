@@ -3,6 +3,9 @@
 #include <DS1307RTC.h>
 
 int p1 = 4;
+int p2 = 5;
+int p3 = 6;
+int p4 = 7;
 
 void setup() {
   // put your setup code here, to run once:
@@ -14,15 +17,28 @@ void setup() {
   Serial.begin(9600);
   while (!Serial) ; // wait for serial
   delay(200);
+  Serial.println("");
 
   pinMode(p1, OUTPUT);
+  pinMode(p2, OUTPUT);
 
-  delay(3000);
-  waterThePlants(p1, 5000);
+  Serial.print("Wait ");
+  managedDelay(30000);
+  Serial.println(" done");
+
+  // delay(3000);
+  // waterThePlants(p1, 5000);
+
+  waterThePlants(p1, 30000);
+  waterThePlants(p2, 20000);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  // dailyLoop();
+}
+
+void dailyLoop() {
   // if (time matches) 
   // // water the plants
   // endif
@@ -85,6 +101,12 @@ void waterThePlants(int pumpPin, long timeInMillis) {
   Serial.print(timeInMillis);
   Serial.print(" ON ");
   digitalWrite(pumpPin, HIGH);
+  managedDelay(timeInMillis);
+  digitalWrite(pumpPin, LOW);
+  Serial.println("OFF");
+}
+
+void managedDelay(long timeInMillis) {
   while (timeInMillis > 0) {
     int sleepTime = min(timeInMillis, 10000);
     Serial.print(sleepTime);
@@ -92,6 +114,4 @@ void waterThePlants(int pumpPin, long timeInMillis) {
     delay(sleepTime);
     timeInMillis -= sleepTime;
   }
-  digitalWrite(pumpPin, LOW);
-  Serial.println("OFF");
 }
